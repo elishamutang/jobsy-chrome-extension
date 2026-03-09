@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jobsy</title>
+    <script src="background.js" defer></script>
+    <script src="content.js" defer></script>
+    <script src="popup.js" defer></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      #logout {
+        display: none;
+      }
+
+      #loginForm {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      body {
+        width: 15rem;
+        background-color: oklch(42.4% 0.199 265.638);
+        margin: 1rem;
+      }
+
+      #email,
+      #password {
+        font-size: 1rem;
+        padding: 0.5rem;
+      }
+
+      #login,
+      #logout {
+        font-size: 1.2rem;
+        padding: 0.5rem;
+        font-weight: bold;
+        background-color: oklch(37.9% 0.146 265.522);
+        color: white;
+        border: 1px solid white;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: all;
+        transition-duration: 100ms;
+      }
+
+      #login:hover {
+        background-color: oklch(54.6% 0.245 262.881);
+      }
+
+      #logout {
+        font-size: 1rem;
+        padding: 0 0.5rem;
+        background-color: oklch(57.7% 0.245 27.325);
+      }
+
+      #logout:hover {
+        background-color: oklch(50.5% 0.213 27.518);
+      }
+
+      #header {
+        margin: 0;
+        padding: 0;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+      }
+
+      #header-one {
+        font-size: 2.5rem;
+        font-weight: bold;
+      }
+
+      #header-two {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      #subtitle {
+        margin-bottom: 10px;
+        color: white;
+      }
+
+      #status {
+        margin-top: 5px;
+      }
+
+      #job-preview-form {
+        display: none;
+        color: white;
+        margin: 1rem 0;
+      }
+
+      .job-details {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+      }
+
+      .job-details > p {
+        width: 100%;
+      }
+
+      .job-details > h3 {
+        align-self: flex-start;
+        width: 550px;
+      }
+
+      .job-details > select {
+        align-self: self-start;
+        padding: 0.5rem;
+        width: 180px;
+      }
+
+      #confirmBtn {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid white;
+        font-size: 1rem;
+        border-radius: 0.5rem;
+        font-weight: bold;
+        cursor: pointer;
+        background-color: oklch(37.9% 0.146 265.522);
+        transition: all;
+        transition-duration: 100ms;
+        color: white;
+      }
+
+      #confirmBtn:hover {
+        background-color: oklch(54.6% 0.245 262.881);
+      }
+
+      #instruction-div {
+        border: 1px solid black;
+        border-radius: 0.2rem;
+        background-color: white;
+        padding: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="header">
+      <div><span id="header-one">J</span><span id="header-two">obsy</span></div>
+
+      <button id="logout">Logout</button>
+    </div>
+
+    <div id="subtitle">
+      <div id="subtitle-text">Keep track of your jobs anywhere!</div>
+      <div id="status"></div>
+    </div>
+
+    <form id="loginForm">
+      <input id="email" type="email" placeholder="Email" required />
+      <input id="password" type="password" placeholder="Password" required />
+      <button type="submit" class="btn" id="login">Login</button>
+    </form>
+
+    <!-- Display job preview -->
+    <form id="job-preview-form">
+      <div id="instruction-div">
+        <p style="color: red">
+          Please review details of job and click confirm to save to your Jobsy
+          account.
+        </p>
+      </div>
+
+      <div class="job-details" style="margin-top: 0.5rem">
+        <p>Title:</p>
+        <h3 id="job-title"></h3>
+      </div>
+
+      <div class="job-details">
+        <p>Company:</p>
+        <h3 id="job-company"></h3>
+      </div>
+
+      <div class="job-details">
+        <p>Industry:</p>
+        <h3 id="job-industry"></h3>
+      </div>
+
+      <div class="job-details">
+        <p>Type:</p>
+        <h3 id="job-type"></h3>
+      </div>
+
+      <div class="job-details">
+        <p>Location:</p>
+        <select id="job-location"></select>
+      </div>
+
+      <!-- Confirmation button -->
+      <button type="submit" id="confirmBtn">Confirm</button>
+    </form>
+  </body>
+</html>

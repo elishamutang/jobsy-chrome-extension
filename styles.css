@@ -1,0 +1,13 @@
+.save-job {
+  width: 200px;
+  padding: 0 1rem;
+  text-align: center;
+  margin: 0 10px;
+  text-decoration: none;
+  border: transparent;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  background-color: oklch(54.6% 0.245 262.881);
+  color: white;
+  cursor: pointer;
+}

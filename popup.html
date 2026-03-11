@@ -24,7 +24,7 @@
       }
 
       body {
-        width: 15rem;
+        width: 20rem;
         background-color: oklch(42.4% 0.199 265.638);
         margin: 1rem;
       }
@@ -55,8 +55,9 @@
 
       #logout {
         font-size: 1rem;
-        padding: 0 0.5rem;
+        padding: 0.5rem;
         background-color: oklch(57.7% 0.245 27.325);
+        height: max-content;
       }
 
       #logout:hover {
@@ -83,7 +84,7 @@
       }
 
       #subtitle {
-        margin-bottom: 10px;
+        margin-bottom: 5px;
         color: white;
       }
 
@@ -95,6 +96,7 @@
         display: none;
         color: white;
         margin: 1rem 0;
+        margin-top: 0;
       }
 
       .job-details {
@@ -113,7 +115,9 @@
       }
 
       .job-details > select {
-        align-self: self-start;
+        border: none;
+        border-radius: 0.5rem;
+        align-self: flex-start;
         padding: 0.5rem;
         width: 180px;
       }
@@ -142,18 +146,68 @@
         background-color: white;
         padding: 0.5rem;
       }
+
+      #loading-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        border-radius: 0.5rem;
+        z-index: 10;
+      }
+
+      .loading-hidden {
+        display: none !important;
+      }
+
+      .spinner {
+        width: 30px;
+        height: 30px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-top: 3px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-bottom: 0.5rem;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      #job-preview-form.loading input,
+      #job-preview-form.loading select,
+      #job-preview-form.loading button {
+        opacity: 0.5;
+        pointer-events: none;
+      }
     </style>
   </head>
   <body>
     <div id="header">
-      <div><span id="header-one">J</span><span id="header-two">obsy</span></div>
+      <div>
+        <div>
+          <span id="header-one">J</span><span id="header-two">obsy</span>
+        </div>
+
+        <div id="subtitle">
+          <div id="subtitle-text">Keep track of your jobs anywhere!</div>
+          <div id="status"></div>
+        </div>
+      </div>
 
       <button id="logout">Logout</button>
-    </div>
-
-    <div id="subtitle">
-      <div id="subtitle-text">Keep track of your jobs anywhere!</div>
-      <div id="status"></div>
     </div>
 
     <form id="loginForm">
@@ -173,31 +227,55 @@
 
       <div class="job-details" style="margin-top: 0.5rem">
         <p>Title:</p>
-        <h3 id="job-title"></h3>
+        <h3 id="job-title-text"></h3>
+        <input type="text" name="title" id="job-title" hidden />
       </div>
 
       <div class="job-details">
         <p>Company:</p>
-        <h3 id="job-company"></h3>
+        <h3 id="job-company-text"></h3>
+        <input type="text" name="company" id="job-company" hidden />
       </div>
 
       <div class="job-details">
         <p>Industry:</p>
-        <h3 id="job-industry"></h3>
+        <h3 id="job-industry-text"></h3>
+        <input type="text" name="industry" id="job-industry" hidden />
       </div>
 
       <div class="job-details">
         <p>Type:</p>
-        <h3 id="job-type"></h3>
+        <h3 id="job-type-text"></h3>
+        <input type="text" name="type" id="job-type" hidden />
       </div>
 
       <div class="job-details">
         <p>Location:</p>
-        <select id="job-location"></select>
+        <h3 id="job-location-text"></h3>
+        <select name="location" id="job-location"></select>
       </div>
+
+      <div class="job-details">
+        <p>Advertised Salary:</p>
+        <h3 id="advertised-salary-text"></h3>
+        <input
+          type="text"
+          name="advertised_salary"
+          id="advertised_salary"
+          hidden
+        />
+      </div>
+
+      <!-- Hidden input for the job posting link -->
+      <input type="text" name="job_link" id="job_link" hidden />
 
       <!-- Confirmation button -->
       <button type="submit" id="confirmBtn">Confirm</button>
+
+      <div id="loading-overlay" class="loading-hidden">
+        <div class="spinner"></div>
+        <p>Saving job...</p>
+      </div>
     </form>
   </body>
 </html>

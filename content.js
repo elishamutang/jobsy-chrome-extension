@@ -75,9 +75,8 @@ chrome.storage.local.get(["authToken"], (result) => {
           company: jobCompany,
           industry: jobIndustry,
           type: jobType,
-          salary: jobSalary ? jobCard.textContent : null,
+          salary: jobSalary ? jobSalary.textContent : null,
           url: window.location.href,
-          timestamp: new Date().toISOString(),
         };
 
         // Save temporarily (overwrites previous)
